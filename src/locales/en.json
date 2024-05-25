@@ -1,0 +1,12 @@
+{
+    "WELCOME": "Welcome to the course platform!",
+    "COURSE_CREATED": "Course successfully created!",
+    "USER_REGISTERED": "User successfully registered!",
+    "LOGIN_SUCCESS": "Login successful!",
+    "INVALID_CREDENTIALS": "Invalid credentials, please try again.",
+    "COURSE_NOT_FOUND": "Course not found.",
+    "USER_NOT_FOUND": "User not found.",
+    "FORUM_CREATED": "Forum successfully created!",
+    "POST_CREATED": "Post successfully created!",
+    "BADGE_EARNED": "Congratulations! You have earned a new badge."
+}

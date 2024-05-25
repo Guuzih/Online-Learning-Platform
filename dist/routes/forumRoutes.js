@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const forumController_1 = require("../controllers/forumController");
+const forumPostController_1 = require("../controllers/forumPostController");
+const authMiddleware_1 = require("../middlewares/authMiddleware");
+const router = (0, express_1.Router)();
+router.post('/', authMiddleware_1.auth, forumController_1.createForum);
+router.get('/', authMiddleware_1.auth, forumController_1.getForum);
+router.get('/:id', authMiddleware_1.auth, forumController_1.getForumById);
+//router.put('/:id', updateForum);
+//router.delete('/:id', deleteForum);
+router.post('/:forumId/posts', authMiddleware_1.auth, forumPostController_1.createForumPost);
+router.get('/:forumId/posts', authMiddleware_1.auth, forumPostController_1.getForumPosts);
+router.put('/posts/:id', authMiddleware_1.auth, forumPostController_1.updateForumPost);
+router.delete('/posts/:id', authMiddleware_1.auth, forumPostController_1.deleteForumPost);
+exports.default = router;

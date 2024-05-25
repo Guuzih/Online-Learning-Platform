@@ -1,0 +1,12 @@
+{
+    "WELCOME": "Bem-vindo à plataforma de cursos!",
+    "COURSE_CREATED": "Curso criado com sucesso!",
+    "USER_REGISTERED": "Usuário registrado com sucesso!",
+    "LOGIN_SUCCESS": "Login realizado com sucesso!",
+    "INVALID_CREDENTIALS": "Credenciais inválidas, por favor tente novamente.",
+    "COURSE_NOT_FOUND": "Curso não encontrado.",
+    "USER_NOT_FOUND": "Usuário não encontrado.",
+    "FORUM_CREATED": "Fórum criado com sucesso!",
+    "POST_CREATED": "Postagem criada com sucesso!",
+    "BADGE_EARNED": "Parabéns! Você ganhou um novo distintivo."
+}
