@@ -18,7 +18,7 @@ export const createCourse = async (req: Request, res: Response) => {
             course: newCourse
         });
     } catch (error) {
-        console.error('Erro ao criar curso:', error);
+
         res.status(400).json({ error: 'Falha ao criar curso' });
     }
 };

@@ -23,6 +23,8 @@ const io = new Server(httpServer, {
 const redisClient = redis.createClient({
     url: process.env.REDIS_URL,
 });
+
+
 const getAsync = promisify(redisClient.get).bind(redisClient);
 
 io.on('connection', (socket: Socket) => {
