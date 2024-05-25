@@ -1,10 +1,13 @@
 import { Sequelize } from 'sequelize';
 
-const sequelize = new Sequelize('online_learning', 'postgres', "123456", {
-    host: 'localhost',
+let databaseUrl: string | undefined = process.env.DATABASE_URL;
+
+if (!databaseUrl) {
+    throw new Error('DATABASE_URL is not defined in environment variables');
+}
+
+const sequelize = new Sequelize(databaseUrl, {
     dialect: 'postgres',
-    port: 5432,
     logging: false,
 });
-
 export default sequelize;
