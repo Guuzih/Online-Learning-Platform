@@ -2,7 +2,7 @@
     "version": 2,
     "builds": [
         {
-            "src": "/src/server.ts",
+            "src": "src/server.ts",
             "use": "@vercel/node"
         }
     ],
@@ -11,5 +11,11 @@
             "src": "/(.*)",
             "dest": "/src/server.ts"
         }
-    ]
+    ],
+    "env": {
+        "NODE_ENV": "production",
+        "PORT": "3000",
+        "DATABASE_URL": "postgresql://neondb_owner:O2hTDmgSHR8W@ep-green-truth-a5u8yf6h.us-east-2.aws.neon.tech/neondb?sslmode=require",
+        "REDIS_URL": "<redis-19893.c10.us-east-1-2.ec2.redns.redis-cloud.com:19893>"
+    }
 }

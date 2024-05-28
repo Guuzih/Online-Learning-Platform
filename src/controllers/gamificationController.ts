@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import Gamification from '../models/gamification';
-import Badge from '../models/badge';
+
 
 export const getUserGamification = async (req: Request, res: Response) => {
     try {
@@ -35,35 +35,3 @@ export const addPoints = async (req: Request, res: Response) => {
     }
 };
 
-export const addBadge = async (req: Request, res: Response) => {
-    try {
-        const { userId, badge, points } = req.body;
-        let gamification = await Gamification.findOne({ where: { userId } });
-
-        if (!gamification) {
-            gamification = await Gamification.create({ userId, badges: badge, points });
-        } else {
-            gamification.badges += `,${badge}`;
-            await gamification.save();
-        }
-
-        res.json(gamification);
-    } catch (error) {
-        res.status(400).json({ error: 'Failed to add badge' });
-    }
-};
-
-
-export const awardBadge = async (req: Request, res: Response) => {
-    try {
-        const { userId, badgeId } = req.body;
-        const badge = await Badge.create({ userId, badgeId });
-
-        res.status(201).json({
-            message: res.__('BADGE_EARNED'),
-            badge
-        });
-    } catch (error) {
-        res.status(400).json({ error: 'Failed to award badge' });
-    }
-};

@@ -22,7 +22,7 @@ forumPost_1.default.belongsTo(forum_1.default, { foreignKey: 'forumId' });
 forum_1.default.hasMany(forumPost_1.default, { foreignKey: 'forumId' });
 const syncDatabase = async () => {
     try {
-        await database_1.default.sync({ force: true });
+        await database_1.default.sync({ force: false });
         console.log('Database synchronized successfully.');
     }
     catch (error) {

@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getForum = exports.getForumById = exports.createForum = void 0;
+exports.deleteForum = exports.updateForum = exports.getForum = exports.getForumById = exports.createForum = void 0;
 const forum_1 = __importDefault(require("../models/forum"));
 const syncDatabase_1 = require("../syncDatabase");
 const createForum = async (req, res) => {
@@ -20,7 +20,6 @@ const createForum = async (req, res) => {
         });
     }
     catch (error) {
-        console.error('Failed to create forum:', error);
         res.status(400).json({ error: 'Failed to create forum' });
     }
 };
@@ -35,7 +34,7 @@ const getForumById = async (req, res) => {
         res.json(forum);
     }
     catch (error) {
-        console.error('Erro ao procurar forum:', error);
+        console.error(error);
         res.status(400).json({ error: 'Failed to get forum' });
     }
 };
@@ -49,8 +48,41 @@ const getForum = async (req, res) => {
         res.json(forum);
     }
     catch (error) {
-        console.error('Erro ao procurar forum:', error);
+        console.error(error);
         res.status(400).json({ error: 'Failed to get forum' });
     }
 };
 exports.getForum = getForum;
+const updateForum = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { title, courseId } = req.body;
+        const forum = await forum_1.default.findByPk(id);
+        if (!forum) {
+            return res.status(404).json({ error: 'Forum post not found' });
+        }
+        forum.courseId = courseId;
+        forum.title = title;
+        await forum.save();
+        res.json(forum);
+    }
+    catch (error) {
+        res.status(400).json({ error: 'Failed to update forum post' });
+    }
+};
+exports.updateForum = updateForum;
+const deleteForum = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const forum = await forum_1.default.findByPk(id);
+        if (!forum) {
+            return res.status(404).json({ error: 'Forum post not found' });
+        }
+        await forum.destroy();
+        res.status(204).send();
+    }
+    catch (error) {
+        res.status(400).json({ error: 'Failed to delete forum post' });
+    }
+};
+exports.deleteForum = deleteForum;

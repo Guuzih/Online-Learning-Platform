@@ -1,15 +1,16 @@
 import { Router } from 'express';
 import {
     createCourse,
-    getCourse,
+    getCourseById,
+    getCourses,
 } from '../controllers/courseController';
 import { auth } from '../middlewares/authMiddleware';
 
 const router = Router();
 
 router.post('/', auth, createCourse);
-//router.get('/', getCourses);
-router.get('/:id', auth, getCourse);
+router.get('/', getCourses);
+router.get('/:id', auth, getCourseById);
 //router.put('/:id', updateCourse);
 //router.delete('/:id', deleteCourse);
 

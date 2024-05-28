@@ -12,7 +12,7 @@ const getUserPerformance = async (req, res) => {
         if (!performance) {
             return res.status(404).json({ error: 'Performance data not found' });
         }
-        res.json(performance);
+        res.json({ performance });
     }
     catch (error) {
         res.status(400).json({ error: 'Failed to fetch performance data' });
@@ -21,10 +21,11 @@ const getUserPerformance = async (req, res) => {
 exports.getUserPerformance = getUserPerformance;
 const addOrUpdatePerformance = async (req, res) => {
     try {
-        const { userId, courseId, progress, score } = req.body;
+        const { courseId, progress, score } = req.body;
+        const userId = req.user?.userId;
         let performance = await performance_1.default.findOne({ where: { userId, courseId } });
         if (!performance) {
-            performance = await performance_1.default.create({ userId, courseId, progress, score });
+            performance = await performance_1.default.create({ userId: Number(userId), courseId, progress, score });
         }
         else {
             performance.progress = progress;
@@ -34,6 +35,7 @@ const addOrUpdatePerformance = async (req, res) => {
         res.json(performance);
     }
     catch (error) {
+        console.log(error);
         res.status(400).json({ error: 'Failed to add or update performance' });
     }
 };

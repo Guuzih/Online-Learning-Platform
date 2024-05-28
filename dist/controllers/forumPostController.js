@@ -7,12 +7,14 @@ exports.deleteForumPost = exports.updateForumPost = exports.getForumPosts = expo
 const forumPost_1 = __importDefault(require("../models/forumPost"));
 const createForumPost = async (req, res) => {
     try {
-        const { content, forumId, title } = req.body;
+        const { content, title } = req.body;
+        const { forumId } = req.params;
         const userId = req.user?.userId;
-        const forumPost = await forumPost_1.default.create({ content, userId: Number(userId), forumId, title });
+        const forumPost = await forumPost_1.default.create({ content, userId: Number(userId), forumId: Number(forumId), title });
         res.status(201).json(forumPost);
     }
     catch (error) {
+        console.log(error);
         res.status(400).json({ error: 'Failed to create forum post' });
     }
 };

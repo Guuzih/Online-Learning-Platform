@@ -19,8 +19,9 @@ export const createForum = async (req: Request, res: Response) => {
             forum: newForum
         });
     } catch (error) {
-        console.error('Failed to create forum:', error);
+
         res.status(400).json({ error: 'Failed to create forum' });
+
     }
 };
 
@@ -34,9 +35,12 @@ export const getForumById = async (req: Request, res: Response) => {
         }
 
         res.json(forum);
+
     } catch (error) {
-        console.error('Erro ao procurar forum:', error);
+
+        console.error(error);
         res.status(400).json({ error: 'Failed to get forum' });
+
     }
 };
 
@@ -52,7 +56,48 @@ export const getForum = async (req: Request, res: Response) => {
         res.json(forum);
 
     } catch (error) {
-        console.error('Erro ao procurar forum:', error);
+
+        console.error(error);
         res.status(400).json({ error: 'Failed to get forum' });
+
+    }
+};
+
+export const updateForum = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const { title, courseId } = req.body;
+        const forum = await Forum.findByPk(id);
+
+        if (!forum) {
+            return res.status(404).json({ error: 'Forum post not found' });
+        }
+
+        forum.courseId = courseId;
+        forum.title = title;
+
+        await forum.save();
+
+        res.json(forum);
+
+    } catch (error) {
+        res.status(400).json({ error: 'Failed to update forum post' });
+    }
+};
+
+export const deleteForum = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const forum = await Forum.findByPk(id);
+
+        if (!forum) {
+            return res.status(404).json({ error: 'Forum post not found' });
+        }
+
+        await forum.destroy();
+        res.status(204).send();
+
+    } catch (error) {
+        res.status(400).json({ error: 'Failed to delete forum post' });
     }
 };

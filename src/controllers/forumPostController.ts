@@ -4,13 +4,20 @@ import ForumPost, { ForumPostQueryOptions } from '../models/forumPost';
 
 
 export const createForumPost = async (req: Request, res: Response) => {
+
     try {
-        const { content, forumId, title } = req.body;
+        const { content, title } = req.body;
+        const { forumId } = req.params;
+
         const userId = req.user?.userId;
-        const forumPost = await ForumPost.create({ content, userId: Number(userId), forumId, title });
+
+        const forumPost = await ForumPost.create({ content, userId: Number(userId), forumId: Number(forumId), title });
+
         res.status(201).json(forumPost);
     } catch (error) {
+        console.log(error)
         res.status(400).json({ error: 'Failed to create forum post' });
+
     }
 };
 

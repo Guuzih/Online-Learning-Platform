@@ -6,5 +6,4 @@ const authMiddleware_1 = require("../middlewares/authMiddleware");
 const router = (0, express_1.Router)();
 router.get('/:userId', authMiddleware_1.auth, gamificationController_1.getUserGamification);
 router.post('/points', authMiddleware_1.auth, gamificationController_1.addPoints);
-router.post('/badges', authMiddleware_1.auth, gamificationController_1.addBadge);
 exports.default = router;
