@@ -7,6 +7,6 @@ const router = (0, express_1.Router)();
 router.post('/', authMiddleware_1.auth, courseController_1.createCourse);
 router.get('/', courseController_1.getCourses);
 router.get('/:id', authMiddleware_1.auth, courseController_1.getCourseById);
-//router.put('/:id', updateCourse);
-//router.delete('/:id', deleteCourse);
+router.put('/:id', courseController_1.updateCourse);
+router.delete('/:id', courseController_1.deleteCourse);
 exports.default = router;

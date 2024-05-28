@@ -22,7 +22,6 @@ export const auth = (req: Request, res: Response, next: NextFunction) => {
 
         next();
     } catch (error) {
-        console.error("Error verifying token:", error);
         res.status(400).json({ message: 'Invalid token' });
     }
 };

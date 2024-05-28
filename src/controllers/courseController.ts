@@ -1,17 +1,17 @@
 import { Request, Response } from 'express';
 import Course from '../models/course';
 
-
 export const createCourse = async (req: Request, res: Response) => {
+
     try {
         const { title, description, content } = req.body;
-        const instructorId = req.user?.userId
+        const userId = req.user?.userId;
 
-        if (!title || !description || !content || !instructorId) {
+        if (!title || !description || !content || !userId) {
             return res.status(400).json({ error: 'All fields are mandatory' });
         }
 
-        const newCourse = await Course.create({ title, description, content, instructorId: Number(instructorId) });
+        const newCourse = await Course.create({ title, description, content, instructorId: Number(userId) });
 
         res.status(201).json({
             message: 'Course created successfully',
@@ -91,7 +91,7 @@ export const deleteCourse = async (req: Request, res: Response) => {
 
     } catch (error) {
 
-        res.status(400).json({ error: 'Failed to course forum post' });
+        res.status(400).json({ error: 'Failed to course forum' });
 
     }
 };

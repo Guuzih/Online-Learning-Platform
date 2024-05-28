@@ -8,11 +8,11 @@ const course_1 = __importDefault(require("../models/course"));
 const createCourse = async (req, res) => {
     try {
         const { title, description, content } = req.body;
-        const instructorId = req.user?.userId;
-        if (!title || !description || !content || !instructorId) {
+        const userId = req.user?.userId;
+        if (!title || !description || !content || !userId) {
             return res.status(400).json({ error: 'All fields are mandatory' });
         }
-        const newCourse = await course_1.default.create({ title, description, content, instructorId: Number(instructorId) });
+        const newCourse = await course_1.default.create({ title, description, content, instructorId: Number(userId) });
         res.status(201).json({
             message: 'Course created successfully',
             course: newCourse
@@ -80,7 +80,7 @@ const deleteCourse = async (req, res) => {
         res.status(204).send();
     }
     catch (error) {
-        res.status(400).json({ error: 'Failed to course forum post' });
+        res.status(400).json({ error: 'Failed to course forum' });
     }
 };
 exports.deleteCourse = deleteCourse;
