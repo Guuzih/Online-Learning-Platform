@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = __importDefault(require("path"));
 const webpack_node_externals_1 = __importDefault(require("webpack-node-externals"));
 const config = {
-    entry: './src/server.ts',
+    entry: './src/server.js',
     output: {
         path: path_1.default.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
@@ -24,7 +24,9 @@ const config = {
         extensions: ['.ts', '.js'],
     },
     externals: [
-        (0, webpack_node_externals_1.default)(),
+        (0, webpack_node_externals_1.default)({
+            allowlist: ['pg', 'pg-hstore'],
+        }),
     ],
 };
 exports.default = config;
