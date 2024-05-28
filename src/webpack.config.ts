@@ -21,7 +21,9 @@ const config: Configuration = {
         extensions: ['.ts', '.js'],
     },
     externals: [
-        nodeExternals(),
+        nodeExternals({
+            allowlist: ['pg', 'pg-hstore'], // Usando allowlist para incluir módulos específicos
+        }),
     ],
 };
 
