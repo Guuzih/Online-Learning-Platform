@@ -21,7 +21,11 @@ const io = new socket_io_1.Server(httpServer, {
     },
 });
 const redisClient = redis_1.default.createClient({
-    url: process.env.REDIS_URL,
+    password: process.env.REDIS_PASSWORD,
+    socket: {
+        host: process.env.REDIS_URL,
+        port: 19893
+    }
 });
 const getAsync = (0, util_1.promisify)(redisClient.get).bind(redisClient);
 io.on('connection', (socket) => {

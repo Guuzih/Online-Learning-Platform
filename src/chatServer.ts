@@ -21,7 +21,11 @@ const io = new Server(httpServer, {
 });
 
 const redisClient = redis.createClient({
-    url: process.env.REDIS_URL,
+    password: process.env.REDIS_PASSWORD,
+    socket: {
+        host: process.env.REDIS_URL,
+        port: 19893
+    }
 });
 
 
