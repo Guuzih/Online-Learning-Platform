@@ -12,7 +12,6 @@ if (!dbHost || !dbUser || !dbPassword || !dbDatabase) {
     throw new Error(`Variáveis de ambiente não definidas. ID do erro: ${errorId}`);
 }
 
-// Construa a URL de conexão com a opção sslmode=require
 const databaseUrl = `postgres://${dbUser}:${dbPassword}@${dbHost}:${process.env.DB_PORT}/${dbDatabase}?sslmode=require`;
 
 const sequelize = new Sequelize(databaseUrl, {
