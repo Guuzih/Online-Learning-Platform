@@ -25,7 +25,7 @@ const config = {
     },
     externals: [
         (0, webpack_node_externals_1.default)({
-            allowlist: ['pg', 'pg-hstore', 'bcrypt'],
+            allowlist: ['pg', 'pg-hstore'],
         }),
     ],
 };
