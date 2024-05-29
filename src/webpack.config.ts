@@ -22,7 +22,7 @@ const config: Configuration = {
     },
     externals: [
         nodeExternals({
-            allowlist: ['pg', 'pg-hstore'], // Usando allowlist para incluir módulos específicos
+            allowlist: ['pg', 'pg-hstore'],
         }),
     ],
 };

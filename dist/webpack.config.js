@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = __importDefault(require("path"));
 const webpack_node_externals_1 = __importDefault(require("webpack-node-externals"));
 const config = {
-    entry: './src/server.js',
+    entry: './src/server.ts',
     output: {
         path: path_1.default.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
